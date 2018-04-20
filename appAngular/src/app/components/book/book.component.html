@@ -1,0 +1,37 @@
+<!-- 
+	<p>Got books {{books | json}}
+	<p>Got authors {{authors | json}}
+ -->
+
+
+<fieldset *ngIf="page==pageType.EDIT_BOOK">
+	<legend>Add New Book</legend>
+	<form>
+		<p>Title: <input type=text name=title [(ngModel)]="book.title"/>
+		<p>Author: 	<select>
+						<option>other</option>
+						<option *ngFor='let a of authors'>{{a.name}}</option>
+					</select>
+		<p>Section: <select>
+						<option>other</option>
+						<option *ngFor='let s of getBookSectionKeys()' [value]='s'>{{bookSectionNames.get(s)}}</option>
+					</select>
+		<p><button (click)="upsertBook()">{{ book.id ? 'Update' : 'Create' }}</button>
+			<button (click)="this.page = pageType.LIST_BOOKS">Cancel</button>
+	</form>
+</fieldset>
+
+
+
+<fieldset *ngIf="page==pageType.LIST_BOOKS">
+	<legend>My Books (<a href="#" (click)="editBook()">New...</a>)</legend>
+	<table cellpadding=20>
+		<tr><th>Author</th><th>Title</th><th>Section</th></tr>
+		<tr *ngFor='let b of books'>
+			<td>{{b.author.name}}</td>
+			<td>{{b.title}}</td>
+			<td>{{b.section}}</td>
+			<td><a href="#" (click)="editBook(b.id)">Edit</a></td>
+		</tr>
+	</table>
+</fieldset>
