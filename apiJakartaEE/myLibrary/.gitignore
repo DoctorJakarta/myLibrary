@@ -1,0 +1,17 @@
+# ignore folder #
+build/
+
+
+# ignore hidden #
+.settings/
+.gradle/
+.classpath
+.project
+
+
+# Class Files #
+*.class
+
+# Package Files #
+*.jar
+*.war
